@@ -6,22 +6,38 @@
     <title>Image Details</title>
   </head>
   <body>
-    <h1>Image Details</h1>
-    <img src="" alt="Image" />
-    <a id="downloadLink" href="" download>Download Image</a>
+    <h1>Download Collage</h1>
+    <img id="recentImage" src="" alt="Recent Image" />
+    <a id="downloadButton" href="#" download>Download Image</a>
 
     <script>
-      const queryString = window.location.search;
-      const urlParams = new URLSearchParams(queryString);
-      const imageUrl = urlParams.get("image");
+      const imagePath = "images";
+      const imageExtension = "png";
 
-      if (imageUrl) {
-        const imgElement = document.querySelector("img");
-        imgElement.src = imageUrl;
+      // Get the list of images in the folder
+      fetch(
+        `https://api.github.com/repos/lucabusby/QR-Testing/contents/${imagePath}`
+      )
+        .then((response) => response.json())
+        .then((data) => {
+          const images = data.filter((item) =>
+            item.name.endsWith(`.${imageExtension}`)
+          );
+          if (images.length > 0) {
+            // Get the most recent image URL
+            const mostRecentImage = images[images.length - 1];
+            const imageUrl = mostRecentImage.download_url;
 
-        const downloadLink = document.getElementById("downloadLink");
-        downloadLink.href = imageUrl;
-      }
+            // Set the image source
+            const imgElement = document.getElementById("recentImage");
+            imgElement.src = imageUrl;
+
+            // Set the download link href
+            const downloadButton = document.getElementById("downloadButton");
+            downloadButton.href = imageUrl;
+          }
+        })
+        .catch((error) => console.error("Error fetching images:", error));
     </script>
   </body>
 </html>

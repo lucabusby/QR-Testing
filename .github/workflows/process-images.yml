@@ -1,0 +1,28 @@
+name: Process New Image
+
+on:
+  push:
+    paths:
+      - "image" # Update to the path of your new image
+    branches:
+      - main
+
+jobs:
+  process_image:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Run Image Processing Script
+        run: |
+          chmod +x process_image.sh
+          ./process_image.sh
+
+      - name: Commit and Push Changes
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git commit -am "Process new image"
+          git push

@@ -3,14 +3,14 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Recent Image</title>
+    <title>Recent Image QR Code</title>
+    <script src="https://cdn.jsdelivr.net/npm/qrious@4.0.2/dist/qrious.min.js"></script>
   </head>
   <body>
-    <h1>Most Recent IDmage</h1>
-    <img id="recentImage" src="" alt="Recent Image" />
+    <h1>Most Recent Image QR Code</h1>
+    <div id="qrCodeContainer"></div>
     <script>
       const imagePath = "images";
-
       const imageExtension = "png";
 
       // Get the list of images in the folder
@@ -27,9 +27,13 @@
             const mostRecentImage = images[images.length - 1];
             const imageUrl = mostRecentImage.download_url;
 
-            // Set the image source
-            const imgElement = document.getElementById("recentImage");
-            imgElement.src = imageUrl;
+            // Generate the QR code
+            const qrCodeContainer = document.getElementById("qrCodeContainer");
+            const qr = new QRious({
+              element: qrCodeContainer,
+              value: imageUrl,
+              size: 200, // Set the size of the QR code
+            });
           }
         })
         .catch((error) => console.error("Error fetching images:", error));

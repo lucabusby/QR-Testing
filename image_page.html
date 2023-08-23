@@ -32,9 +32,10 @@
             const imgElement = document.getElementById("recentImage");
             imgElement.src = imageUrl;
 
-            // Set the download link href
+            // Set the download link attributes
             const downloadButton = document.getElementById("downloadButton");
             downloadButton.href = imageUrl;
+            downloadButton.setAttribute("download", mostRecentImage.name);
           }
         })
         .catch((error) => console.error("Error fetching images:", error));

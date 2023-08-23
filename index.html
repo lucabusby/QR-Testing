@@ -39,7 +39,7 @@
 
             function generateQRCode(imageLink) {
               const qrcode = new QRCode(qrcodeDiv, {
-                text: `image_page.html?image=${encodeURIComponent(imageLink)}`,
+                text: "https://lucabusby.github.io/QR-Testing/image_page",
                 width: 128,
                 height: 128,
               });

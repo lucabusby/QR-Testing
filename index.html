@@ -13,7 +13,6 @@
 
     <script>
       const imagePath = "images";
-
       const imageExtension = "png";
 
       // Get the list of images in the folder
@@ -40,7 +39,7 @@
 
             function generateQRCode(imageLink) {
               const qrcode = new QRCode(qrcodeDiv, {
-                text: imageLink,
+                text: `image_page.html?image=${encodeURIComponent(imageLink)}`,
                 width: 128,
                 height: 128,
               });

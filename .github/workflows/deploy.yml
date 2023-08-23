@@ -1,27 +1,27 @@
-name: Update and Deploy Website
+name: Auto Commit and Push
 
 on:
   push:
+    paths:
+      - "images"
     branches:
       - main
 
 jobs:
-  update_and_deploy:
+  commit_and_push:
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Commit changes
+      - name: Configure Git
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
-          git commit -am "Update image"
-          git push
 
-      - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v3
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./QR-Testing/images
+      - name: Commit and Push
+        run: |
+          git add -A
+          git commit -m "Add new image" || true # Continue even if no changes are detected
+          git push

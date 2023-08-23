@@ -33,20 +33,18 @@
             // Set the image source
             const imgElement = document.getElementById("recentImage");
             imgElement.src = imageUrl;
-          }
 
-          const imageLink =
-            "https://raw.githubusercontent.com/lucabusby/QR-Testing/main/images/16.png"; // Replace with your image link
-          const qrcodeDiv = document.getElementById("qrcode");
+            const qrcodeDiv = document.getElementById("qrcode");
 
-          generateQRCode(imageLink);
+            generateQRCode(imageUrl);
 
-          function generateQRCode(imageLink) {
-            const qrcode = new QRCode(qrcodeDiv, {
-              text: imageLink,
-              width: 128,
-              height: 128,
-            });
+            function generateQRCode(imageLink) {
+              const qrcode = new QRCode(qrcodeDiv, {
+                text: imageLink,
+                width: 128,
+                height: 128,
+              });
+            }
           }
         })
         .catch((error) => console.error("Error fetching images:", error));

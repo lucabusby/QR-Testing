@@ -6,9 +6,34 @@
     <title>Image Details</title>
   </head>
   <body style="margin: 0px">
-    <h1>Download Collage</h1>
-    <img style="height: 80vh" id="recentImage" src="" alt="Recent Image" />
-    <a id="downloadButton" href="#">Download Image</a>
+    <div
+      style="
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 80vh;
+        margin-top: 20px;
+      "
+    >
+      <img
+        style="max-height: 80vh; max-width: 100%"
+        id="recentImage"
+        src=""
+        alt="Recent Image"
+      />
+    </div>
+
+    <div
+      style="
+        background-color: black;
+        padding: 20px;
+        border-radius: 20px;
+        margin: 10px 40vw 10px 40vw;
+        text-align: center;
+      "
+    >
+      <a style="color: white" id="downloadButton" href="#">Download Image</a>
+    </div>
 
     <script>
       const imagePath = "images";
@@ -27,8 +52,6 @@
             // Get the most recent image URL
             const mostRecentImage = images[images.length - 1];
             const imageUrl = mostRecentImage.download_url;
-
-            console.log(imageUrl);
 
             // Set the image source
             const imgElement = document.getElementById("recentImage");

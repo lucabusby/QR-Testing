@@ -28,6 +28,8 @@
             const mostRecentImage = images[images.length - 1];
             const imageUrl = mostRecentImage.download_url;
 
+            console.log(imageUrl);
+
             // Set the image source
             const imgElement = document.getElementById("recentImage");
             imgElement.src = imageUrl;

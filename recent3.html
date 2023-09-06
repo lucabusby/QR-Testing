@@ -3,9 +3,25 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+      body {
+        margin: 0;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+      }
+
+      .image {
+        width: 33.33vw;
+        height: 33.33vh;
+        object-fit: cover;
+      }
+    </style>
   </head>
-  <body style="margin: 0px">
-    <img style="height: 100vh" id="recentImage" src="" alt="Recent Image" />
+  <body>
+    <div class="image-container"></div>
 
     <script>
       const imagePath = "images";
@@ -21,13 +37,19 @@
             item.name.endsWith(`.${imageExtension}`)
           );
           if (images.length > 0) {
-            // Get the most recent image URL
-            const mostRecentImage = images[images.length - 3];
-            const imageUrl = mostRecentImage.download_url;
+            // Get the last 6 images
+            const lastSixImages = images.slice(-6);
 
-            // Set the image source
-            const imgElement = document.getElementById("recentImage");
-            imgElement.src = imageUrl;
+            // Create image elements and append them to the container
+            const imageContainer = document.querySelector(".image-container");
+            lastSixImages.forEach((image) => {
+              const imageUrl = image.download_url;
+              const imgElement = document.createElement("img");
+              imgElement.src = imageUrl;
+              imgElement.alt = "Image";
+              imgElement.classList.add("image");
+              imageContainer.appendChild(imgElement);
+            });
           }
         })
         .catch((error) => console.error("Error fetching images:", error));

@@ -6,6 +6,7 @@
   </head>
   <body style="margin: 0px">
     <img style="height: 100vh" id="recentImage" src="" alt="Recent Image" />
+    <div id="qrcode"></div>
 
     <script>
       const imagePath = "images";
@@ -22,12 +23,24 @@
           );
           if (images.length > 0) {
             // Get the most recent image URL
-            const mostRecentImage = images[images.length - 2];
+            const mostRecentImage = images[images.length - 1];
             const imageUrl = mostRecentImage.download_url;
 
             // Set the image source
             const imgElement = document.getElementById("recentImage");
             imgElement.src = imageUrl;
+          }
+
+          const qrcodeDiv = document.getElementById("qrcode");
+
+          generateQRCode(imageUrl);
+
+          function generateQRCode(imageLink) {
+            const qrcode = new QRCode(qrcodeDiv, {
+              text: imageLink,
+              width: 128,
+              height: 128,
+            });
           }
         })
         .catch((error) => console.error("Error fetching images:", error));

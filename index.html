@@ -4,11 +4,18 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script src="qrcode.min.js"></script>
-    <title>Recent Image</title>
+    <title>QR</title>
   </head>
   <body>
-    <h1>Most Recent IDmage</h1>
-    <div id="qrcode"></div>
+    <div
+      id="qrcode"
+      style="
+        padding: 30px;
+        background-color: white;
+        display: flex;
+        justify-content: center;
+      "
+    ></div>
     <img style="display: none" id="recentImage" src="" alt="Recent Image" />
 
     <script>
@@ -42,13 +49,14 @@
               const qrcode = new QRCode(qrcodeDiv, {
                 //text: "https://lucabusby.github.io/QR-Testing/image_page",
                 text: imageLink,
-                width: 128,
-                height: 128,
+                width: 400,
+                height: 400,
+                colorDark: "#000000",
+                colorLight: "#ffff",
               });
             }
           }
-        })
-        .catch((error) => console.error("Error fetching images:", error));
+        });
     </script>
   </body>
 </html>

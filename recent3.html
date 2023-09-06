@@ -6,23 +6,19 @@
     <style>
       body {
         margin: 0;
+        padding: 0;
         display: flex;
         flex-wrap: wrap;
         justify-content: center;
-        align-items: center;
-        height: 100vh;
       }
 
-      .image {
-        width: 30vw;
+      img {
+        width: 50vw;
         height: 50vh;
-        object-fit: cover;
       }
     </style>
   </head>
   <body>
-    <div class="image-container"></div>
-
     <script>
       const imagePath = "images";
       const imageExtension = "png";
@@ -33,24 +29,18 @@
       )
         .then((response) => response.json())
         .then((data) => {
-          const images = data.filter((item) =>
-            item.name.endsWith(`.${imageExtension}`)
-          );
-          if (images.length > 0) {
-            // Get the last 6 images
-            const lastSixImages = images.slice(-6);
+          const images = data
+            .filter((item) => item.name.endsWith(`.${imageExtension}`))
+            .reverse(); // Reverse the order to get the most recent images first
 
-            // Create image elements and append them to the container
-            const imageContainer = document.querySelector(".image-container");
-            lastSixImages.forEach((image) => {
-              const imageUrl = image.download_url;
-              const imgElement = document.createElement("img");
-              imgElement.src = imageUrl;
-              imgElement.alt = "Image";
-              imgElement.classList.add("image");
-              imageContainer.appendChild(imgElement);
-            });
-          }
+          // Create image elements and add them to the document
+          images.slice(0, 4).forEach((image, index) => {
+            const imageUrl = image.download_url;
+            const imgElement = document.createElement("img");
+            imgElement.src = imageUrl;
+            imgElement.alt = `Image ${index + 1}`;
+            document.body.appendChild(imgElement);
+          });
         })
         .catch((error) => console.error("Error fetching images:", error));
     </script>

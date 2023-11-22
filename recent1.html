@@ -8,12 +8,12 @@
     <img style="height: 100vh" id="recentImage" src="" alt="Recent Image" />
 
     <script>
-      const imagePath = "images";
+      const imagePath = "SavedImages";
       const imageExtension = "png";
 
       // Get the list of images in the folder
       fetch(
-        `https://api.github.com/repos/lucabusby/QR-Testing/contents/${imagePath}`
+        `https://github.com/basil-balthasar/ubuntu_collagecuisine/tree/main/public/History/${imagePath}`
       )
         .then((response) => response.json())
         .then((data) => {

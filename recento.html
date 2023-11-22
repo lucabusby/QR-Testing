@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>p5.js Save to Specific Folder</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.js"></script>
+  </head>
+  <body>
+    <button id="saveButton">Save Canvas</button>
+    <script>
+      let canvas;
+
+      function setup() {
+        createCanvas(400, 400);
+        canvas = document.getElementById("defaultCanvas0"); // Get the canvas element
+        let saveButton = document.getElementById("saveButton");
+        saveButton.addEventListener("click", saveCanvasToFolder);
+      }
+
+      function saveCanvasToFolder() {
+        // Prompt the user to choose a location to save the file
+        canvas.toBlob(function (blob) {
+          let url = URL.createObjectURL(blob);
+          let a = document.createElement("a");
+          a.href = url;
+          a.download = "myCanvas.png"; // Set the desired file name and extension
+          a.style.display = "none";
+          document.body.appendChild(a);
+          a.click();
+          window.URL.revokeObjectURL(url);
+        });
+      }
+    </script>
+  </body>
+</html>

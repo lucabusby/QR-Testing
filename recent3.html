@@ -20,30 +20,6 @@
     </style>
   </head>
   <body>
-    <script>
-      const imagePath = "images";
-      const imageExtension = "png";
-
-      // Get the list of images in the folder
-      fetch(
-        `https://api.github.com/repos/lucabusby/QR-Testing/contents/${imagePath}`
-      )
-        .then((response) => response.json())
-        .then((data) => {
-          const images = data
-            .filter((item) => item.name.endsWith(`.${imageExtension}`))
-            .reverse(); // Reverse the order to get the most recent images first
-
-          // Create image elements and add them to the document
-          images.forEach((image, index) => {
-            const imageUrl = image.download_url;
-            const imgElement = document.createElement("img");
-            imgElement.src = imageUrl;
-            imgElement.alt = `Image ${index + 1}`;
-            document.body.appendChild(imgElement);
-          });
-        })
-        .catch((error) => console.error("Error fetching images:", error));
-    </script>
+    <script></script>
   </body>
 </html>

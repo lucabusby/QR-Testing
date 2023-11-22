@@ -6,15 +6,12 @@
   </head>
   <body style="margin: 0px">
     <img style="height: 100vh" id="recentImage" src="" alt="Recent Image" />
-    <div id="qrcode"></div>
 
     <script>
-      const imagePath = "images";
       const imageExtension = "png";
 
-      // Get the list of images in the folder
       fetch(
-        `https://api.github.com/repos/lucabusby/QR-Testing/contents/${imagePath}`
+        `https://api.github.com/repos/basil-balthasar/ubuntu_collagecuisine/contents/public/History/SavedImages`
       )
         .then((response) => response.json())
         .then((data) => {
@@ -28,22 +25,15 @@
 
             // Set the image source
             const imgElement = document.getElementById("recentImage");
-            imgElement.src = "images/collage-3.png";
-          }
-
-          const qrcodeDiv = document.getElementById("qrcode");
-
-          generateQRCode(imageUrl);
-
-          function generateQRCode(imageLink) {
-            const qrcode = new QRCode(qrcodeDiv, {
-              text: imageLink,
-              width: 128,
-              height: 128,
-            });
+            imgElement.src = imageUrl;
           }
         })
-        .catch((error) => console.error("Error fetching images:", error));
+        .catch((error) =>
+          console.error(
+            "Error displaying most recent image from GitHub:",
+            error
+          )
+        );
     </script>
   </body>
 </html>
